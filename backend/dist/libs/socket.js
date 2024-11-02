@@ -13,13 +13,30 @@ const Ticket_1 = __importDefault(require("../models/Ticket"));
 const jsonwebtoken_1 = require("jsonwebtoken");
 const auth_1 = __importDefault(require("../config/auth"));
 const counter_1 = require("./counter");
+const admin_ui_1 = require("@socket.io/admin-ui");
 let io;
 const initIO = (httpServer) => {
     io = new socket_io_1.Server(httpServer, {
         cors: {
-            origin: process.env.FRONTEND_URL
+            origin: process.env.FRONTEND_URL,
+            methods: ["GET", "POST"],
+            credentials: true
         }
     });
+    if (process.env.SOCKET_ADMIN && JSON.parse(process.env.SOCKET_ADMIN)) {
+        User_1.default.findByPk(1).then((adminUser) => {
+            if (adminUser) {
+                (0, admin_ui_1.instrument)(io, {
+                    auth: {
+                        type: "basic",
+                        username: adminUser.email,
+                        password: adminUser.passwordHash,
+                    },
+                    mode: "production",
+                });
+            }
+        });
+    }
     io.on("connection", async (socket) => {
         logger_1.default.info("Client Connected");
         const { token } = socket.handshake.query;

@@ -1305,7 +1305,7 @@ async function handleCloseTicketsAutomatic() {
 async function handleWhatsapp() {
     const jobW = new CronJob('* 15 3 * * *', async () => {
         //*Whatsapp
-        (0, GetWhatsapp_1.GetWhatsapp)();
+        (0, GetWhatsapp_1.GetWhatsApp)();
         jobW.stop();
     }, null, false, 'America/Sao_Paulo');
     jobW.start();

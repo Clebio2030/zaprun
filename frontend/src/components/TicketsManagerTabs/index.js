@@ -271,7 +271,7 @@ const useStyles = makeStyles((theme) => ({
   filterIcon: {
     marginRight: 6,
     alignSelf: "center",
-    color: theme.mode === "light" ? "#FF7606" : "#FFF",
+    color: theme.mode === "light" ? "#0872b9" : "#FFF",
     cursor: "pointer",
   },
   button: {

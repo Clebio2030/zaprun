@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     },
     bottomButtonVisibilityIcon: {
         padding: 1,
-        color: theme.mode === "light" ? '#FF7606' : '#FFF',
+        color: theme.mode === "light" ? '#0872b9' : '#FFF',
     },
     botoes: {
         display: "flex",

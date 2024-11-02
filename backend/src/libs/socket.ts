@@ -8,15 +8,35 @@ import Ticket from "../models/Ticket";
 import { verify } from "jsonwebtoken";
 import authConfig from "../config/auth";
 import { CounterManager } from "./counter"
+import { instrument } from "@socket.io/admin-ui";
 
 let io: SocketIO;
 
 export const initIO = (httpServer: Server): SocketIO => {
   io = new SocketIO(httpServer, {
     cors: {
-      origin: process.env.FRONTEND_URL
+      origin: process.env.FRONTEND_URL,
+      methods: ["GET", "POST"],
+      credentials: true
     }
   });
+
+  if (process.env.SOCKET_ADMIN && JSON.parse(process.env.SOCKET_ADMIN)) {
+    User.findByPk(1).then(
+      (adminUser) => {
+        if (adminUser) {
+          instrument(io, {
+            auth: {
+              type: "basic",
+              username: adminUser.email,
+              password: adminUser.passwordHash,
+            },
+            mode: "production",
+          });
+        }
+      }
+    );
+  }
 
   io.on("connection", async socket => {
     logger.info("Client Connected");

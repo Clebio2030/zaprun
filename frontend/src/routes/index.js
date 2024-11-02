@@ -37,7 +37,10 @@ import ForgetPassword from "../pages/ForgetPassWord/";
 import AllConnections from "../pages/AllConnections";
 import Reports from "../pages/Reports";
 import { FlowBuilderConfig } from "../pages/FlowBuilderConfig";
+// import Integrations from '../pages/Integrations';
+// import GoogleCalendarComponent from '../pages/Integrations/components/GoogleCalendarComponent';
 import FlowBuilder from "../pages/FlowBuilder";
+import FlowDefault from "../pages/FlowDefault"
 import CampaignsPhrase from "../pages/CampaignsPhrase";
 import Subscription from "../pages/Subscription";
 import QueueIntegration from "../pages/QueueIntegration";
@@ -45,9 +48,6 @@ import Files from "../pages/Files";
 import ToDoList from "../pages/ToDoList";
 import Kanban from "../pages/Kanban";
 import TagsKanban from "../pages/TagsKanban";
-
-import PortalMainContent from "../pages/Portal";
-import PoliticaPrivacidade from "../pages/Portal/LGPD";
 const Routes = () => {
   const [showCampaigns, setShowCampaigns] = useState(false);
 
@@ -63,14 +63,11 @@ const Routes = () => {
       <AuthProvider>
         <TicketsContextProvider>
           <Switch>
-            <Route exact path="faq/politica" component={PoliticaPrivacidade}/>
-            <Route exact path="/faq" component={PortalMainContent}/>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/forgetpsw" component={ForgetPassword} />
             <WhatsAppsProvider>
               <LoggedInLayout>
-                
                 <Route exact path="/financeiro" component={Financeiro} isPrivate />
 
                 <Route exact path="/companies" component={Companies} isPrivate />
@@ -91,9 +88,24 @@ const Routes = () => {
                 <Route exact path="/reports" component={Reports} isPrivate />
                 <Route exact path="/queue-integration" component={QueueIntegration} isPrivate />
                 <Route exact path="/announcements" component={Annoucements} isPrivate />
-                <Route exact path="/phrase-lists" component={CampaignsPhrase} isPrivate/>
-                <Route exact path="/flowbuilders" component={FlowBuilder} isPrivate/>
-                <Route exact path="/flowbuilder/:id?" component={FlowBuilderConfig} isPrivat />
+                <Route
+                  exact
+                  path="/phrase-lists"
+                  component={CampaignsPhrase}
+                  isPrivate
+                />
+                <Route
+                  exact
+                  path="/flowbuilders"
+                  component={FlowBuilder}
+                  isPrivate
+                />
+                <Route
+                  exact
+                  path="/flowbuilder/:id?"
+                  component={FlowBuilderConfig}
+                  isPrivate
+                />
                 <Route exact path="/chats/:id?" component={Chat} isPrivate />
                 <Route exact path="/files" component={Files} isPrivate />
                 <Route exact path="/moments" component={ChatMoments} isPrivate />
@@ -101,7 +113,12 @@ const Routes = () => {
                 <Route exact path="/TagsKanban" component={TagsKanban} isPrivate />
                 <Route exact path="/prompts" component={Prompts} isPrivate />
                 <Route exact path="/allConnections" component={AllConnections} isPrivate />
-                <Route exact path="/subscription" component={Subscription} isPrivate />
+                <Route
+                  exact
+                  path="/subscription"
+                  component={Subscription}
+                  isPrivate
+                />
                 {showCampaigns && (
                   <>
                     <Route exact path="/contact-lists" component={ContactLists} isPrivate />

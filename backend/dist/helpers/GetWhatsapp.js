@@ -3,11 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetWhatsapp = void 0;
+exports.GetWhatsApp = void 0;
 const AppError_1 = __importDefault(require("../errors/AppError"));
 const Whatsapp_1 = __importDefault(require("../models/Whatsapp"));
 const GetDefaultWhatsAppByUser_1 = __importDefault(require("./GetDefaultWhatsAppByUser"));
-const GetWhatsapp = async (whatsappId, companyId = null, userId) => {
+const GetWhatsApp = async (whatsappId, companyId = null, userId) => {
     let connection = null;
     console.log({ whatsappId, companyId, userId });
     if (whatsappId) {
@@ -36,4 +36,4 @@ const GetWhatsapp = async (whatsappId, companyId = null, userId) => {
     }
     return connection;
 };
-exports.GetWhatsapp = GetWhatsapp;
+exports.GetWhatsApp = GetWhatsApp;

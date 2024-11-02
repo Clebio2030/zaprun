@@ -19,7 +19,7 @@ module.exports = {
       { key: "acceptAudioMessageContact", value: "enabled", companyId: "1" },
       { key: "enableLGPD", value: "disabled", companyId: "1" },
       { key: "requiredTag", value: "disabled", companyId: "1" },
-      { key: "wtV", value: "disabled" },
+      { key: "wtV", value: "disabled" }
     ];
 
     for (let setting of settings) {

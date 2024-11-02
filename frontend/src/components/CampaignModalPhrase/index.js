@@ -265,8 +265,26 @@ const CampaignModalPhrase = ({ open, onClose, FlowCampaignId, onSave }) => {
         {!loading && (
           <Stack sx={{ padding: "52px" }}>
             <Stack sx={{ gap: "14px" }}>
-
-              {/*Inicio  */}
+              <Stack gap={1}>
+                <Typography>Nome do disparo por frase</Typography>
+                <TextField
+                  label={""}
+                  name="text"
+                  variant="outlined"
+                  error={dataItemError.name}
+                  defaultValue={dataItem.name}
+                  margin="dense"
+                  onChange={e => {
+                    setDataItem(old => {
+                      let newValue = old;
+                      newValue.name = e.target.value;
+                      return newValue;
+                    });
+                  }}
+                  className={classes.textField}
+                  style={{ width: "100%" }}
+                />
+              </Stack>
               <Stack gap={1}>
                 <Typography>Escolha um fluxo</Typography>
                 <Autocomplete
@@ -301,9 +319,79 @@ const CampaignModalPhrase = ({ open, onClose, FlowCampaignId, onSave }) => {
                   }
                 />
               </Stack>
+              <Stack gap={1}>
+                <Select
+                  required
+                  fullWidth
+                  displayEmpty
+                  variant="outlined"
+                  value={selectedWhatsapp}
+                  onChange={(e) => {
+                    setSelectedWhatsapp(e.target.value)
+                  }}
+                  MenuProps={{
+                    anchorOrigin: {
+                      vertical: "bottom",
+                      horizontal: "left"
+                    },
+                    transformOrigin: {
+                      vertical: "top",
+                      horizontal: "left"
+                    },
+                    getContentAnchorEl: null,
+                  }}
+                  renderValue={() => {
+                    if (selectedWhatsapp === "") {
+                      return "Selecione uma Conexão"
+                    }
+                    const whatsapp = whatsApps.find(w => w.id === selectedWhatsapp)
+                    return whatsapp.name
+                  }}
+                >
 
-              { /* Fim */}
-
+                  {whatsApps?.length > 0 &&
+                    whatsApps.map((whatsapp, key) => (
+                      <MenuItem dense key={key} value={whatsapp.id}>
+                        <ListItemText
+                          primary={
+                            <>
+                              <Typography component="span" style={{ fontSize: 14, marginLeft: "10px", display: "inline-flex", alignItems: "center", lineHeight: "2" }}>
+                                {whatsapp.name} &nbsp; <p className={(whatsapp.status) === 'CONNECTED' ? classes.online : classes.offline} >({whatsapp.status})</p>
+                              </Typography>
+                            </>
+                          }
+                        />
+                      </MenuItem>
+                    ))
+                  }
+                </Select>
+              </Stack>
+              <Stack gap={1}>
+                <Typography>Qual frase dispara o fluxo?</Typography>
+                <TextField
+                  label={""}
+                  name="text"
+                  variant="outlined"
+                  error={dataItemError.phrase}
+                  defaultValue={dataItem.phrase}
+                  margin="dense"
+                  onChange={e => {
+                    setDataItem(old => {
+                      let newValue = old;
+                      newValue.phrase = e.target.value;
+                      return newValue;
+                    });
+                  }}
+                  className={classes.textField}
+                  style={{ width: "100%" }}
+                />
+              </Stack>
+              <Stack direction={'row'} gap={2}>
+                <Stack justifyContent={'center'}>
+                  <Typography>Status</Typography>
+                </Stack>
+                <Checkbox checked={active} onChange={() => setActive(old => !old)} />
+              </Stack>
             </Stack>
             <Stack
               direction={"row"}

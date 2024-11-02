@@ -383,7 +383,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
 
   return (
     <div onClick={drawerClose}>
-      {/*Dashboard Gerencia*/}
       <Can
         role={
           (user.profile === "user" && user.showDashboard === "enabled") || user.allowRealTime === "enabled"
@@ -464,21 +463,20 @@ const MainListItems = ({ collapsed, drawerClose }) => {
           </>
         )}
       />
-      {/*Atendimento */}
       <ListItemLink
         to="/tickets"
         primary={i18n.t("mainDrawer.listItems.tickets")}
         icon={<WhatsAppIcon />}
         tooltip={collapsed}
       />
-      {/*Repostas rapidas */}
+
       <ListItemLink
         to="/quick-messages"
         primary={i18n.t("mainDrawer.listItems.quickMessages")}
         icon={<FlashOnIcon />}
         tooltip={collapsed}
       />
-      {/*Kanban */}
+
       {showKanban && (
         <>
           <ListItemLink
@@ -489,14 +487,14 @@ const MainListItems = ({ collapsed, drawerClose }) => {
           />
         </>
       )}
-      {/*Contatos */}
+
       <ListItemLink
         to="/contacts"
         primary={i18n.t("mainDrawer.listItems.contacts")}
         icon={<ContactPhoneOutlinedIcon />}
         tooltip={collapsed}
       />
-       {/*Agendamentos */}     
+
       {showSchedules && (
         <>
           <ListItemLink
@@ -508,7 +506,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
         </>
       )}
 
-      {/*Tags */}
       <ListItemLink
         to="/tags"
         primary={i18n.t("mainDrawer.listItems.tags")}
@@ -516,7 +513,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
         tooltip={collapsed}
       />
 
-      {/*Chat Interno */}
       {showInternalChat && (
         <>
           <ListItemLink
@@ -532,14 +528,11 @@ const MainListItems = ({ collapsed, drawerClose }) => {
         </>
       )}
 
-      {/*Sistema de Lembrete */}
       {/* <ListItemLink
         to="/todolist"
         primary={i18n.t("ToDoList")}
         icon={<EventAvailableIcon />}
       /> */}
-
-      {/*Video de Ajuda */}
       {hasHelps && (
         <ListItemLink
           to="/helps"
@@ -548,7 +541,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
           tooltip={collapsed}
         />
       )}
-      {/*Campanhas */}
       <Can
         role={user.profile === "user" && user.allowConnections === "enabled" ? "admin" : user.profile}
         perform="dashboard:view"
@@ -622,13 +614,13 @@ const MainListItems = ({ collapsed, drawerClose }) => {
               />
             )}
 
-            {/* Flow */}
+            {/* FLOWBUILDER */}
             <Can
               role={user.profile}
               perform="dashboard:view"
               yes={() => (
                 <>
-                  <Tooltip title={collapsed ? i18n.t("mainDrawer.listItems.flow") : ""} placement="right">
+                  <Tooltip title={collapsed ? i18n.t("mainDrawer.listItems.campaigns") : ""} placement="right">
                     <ListItem
                       dense
                       button
@@ -673,9 +665,8 @@ const MainListItems = ({ collapsed, drawerClose }) => {
 
                       <ListItemLink
                         to="/flowbuilders"
-                        primary={'Fluxo de Conversa'}
+                        primary={'Fluxo de conversa'}
                         icon={<ShapeLine />}
-                        tooltip={collapsed}
                       />
                     </List>
                   </Collapse>
@@ -683,7 +674,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
               )}
             />
 
-            {/*Informativo*/}
+
             {user.super && (
               <ListItemLink
                 to="/announcements"
@@ -693,8 +684,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
               />
             )}
 
-            {/*Antigo API */}
-            {/*showExternalApi && (
+            {showExternalApi && (
               <>
                 <Can
                   role={user.profile}
@@ -709,8 +699,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                   )}
                 />
               </>
-            )*/}
-            {/*Usuarios*/}
+            )}
             <Can
               role={user.profile}
               perform="dashboard:view"
@@ -723,7 +712,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 />
               )}
             />
-            {/* Filas */}
             <Can
               role={user.profile}
               perform="dashboard:view"
@@ -737,7 +725,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
               )}
             />
 
-            {/*OpenAI/ChatGPT*/}
             {showOpenAi && (
               <Can
                 role={user.profile}
@@ -752,7 +739,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 )}
               />
             )}
-            {/*Integrações*/}
+
             {showIntegrations && (
               <Can
                 role={user.profile}
@@ -767,7 +754,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 )}
               />
             )}
-            {/*Conexões */}
             <Can
               role={user.profile === "user" && user.allowConnections === "enabled" ? "admin" : user.profile}
               perform={"drawer-admin-items:view"}
@@ -781,7 +767,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 />
               )}
             />
-            {/*Gerencia Conexões */}
             {user.super && (
               <ListItemLink
                 to="/allConnections"
@@ -790,7 +775,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 tooltip={collapsed}
               />
             )}
-            {/*Lista de Arquivos */}
             <Can
               role={user.profile}
               perform="dashboard:view"
@@ -803,7 +787,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 />
               )}
             />
-            {/*Financeiro */}
             <Can
               role={user.profile}
               perform="dashboard:view"
@@ -816,7 +799,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 />
               )}
             />
-            {/* Configurações */}
             <Can
               role={user.profile}
               perform="dashboard:view"
@@ -829,7 +811,12 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 />
               )}
             />
-            {/*Empresas*/}
+            {/* {user.super && (
+              <ListSubheader inset>
+                {i18n.t("mainDrawer.listItems.administration")}
+              </ListSubheader>
+            )} */}
+
             {user.super && (
               <ListItemLink
                 to="/companies"

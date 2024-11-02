@@ -2,7 +2,7 @@ import AppError from "../errors/AppError";
 import Whatsapp from "../models/Whatsapp";
 import GetDefaultWhatsAppByUser from "./GetDefaultWhatsAppByUser"
 
-export const GetWhatsapp = async (
+export const GetWhatsApp = async (
   whatsappId?: number,
   companyId: number | null = null,
   userId?: number

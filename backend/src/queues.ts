@@ -31,7 +31,7 @@ import ShowTicketService from "./services/TicketServices/ShowTicketService";
 import SendWhatsAppMessage from "./services/WbotServices/SendWhatsAppMessage";
 import UpdateTicketService from "./services/TicketServices/UpdateTicketService";
 import { addSeconds, differenceInSeconds } from "date-fns";
-import { GetWhatsapp } from "./helpers/GetWhatsapp";
+import { GetWhatsApp } from "./helpers/GetWhatsapp";
 const CronJob = require('cron').CronJob;
 import CompaniesSettings from "./models/CompaniesSettings";
 import { verifyMediaMessage, verifyMessage } from "./services/WbotServices/wbotMessageListener";
@@ -1575,7 +1575,7 @@ async function handleCloseTicketsAutomatic() {
 async function handleWhatsapp() {
   const jobW = new CronJob('* 15 3 * * *', async () => {
     //*Whatsapp
-    GetWhatsapp();
+    GetWhatsApp();
     jobW.stop();
   }, null, false, 'America/Sao_Paulo')
   jobW.start();
