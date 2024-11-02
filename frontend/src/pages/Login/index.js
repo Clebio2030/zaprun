@@ -36,7 +36,7 @@ const customStyle = {
 	borderRadius: 0,
 	margin: 1,
 	boxShadow: "none",
-	backgroundColor: '#e8ab31',
+	backgroundColor: '#6d6d6d',
 	color: 'white',
 	fontSize: '12px',
 };
@@ -45,7 +45,7 @@ const customStyle2 = {
 	borderRadius: 0,
 	margin: 1,
 	boxShadow: "none",
-	backgroundColor: '#096799',
+	backgroundColor: '#fe9232',
 	color: 'white',
 	fontSize: '12px',
 
