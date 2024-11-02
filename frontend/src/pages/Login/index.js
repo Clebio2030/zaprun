@@ -24,7 +24,7 @@ const Copyright = () => {
 		<Typography variant="body2" color="#fff" align="center">
 			{"Copyright "}
 			<Link color="#fff" href="#">
-				GBSOficial
+			ZAPRUN
 			</Link>{" "}
 			{new Date().getFullYear()}
 			{"."}
@@ -155,7 +155,7 @@ const Login = () => {
 	return (
 		<>
 			<Helmet>
-				<title>{appName || "GBSOficial"}</title>
+				<title>{appName || "ZAPRUN"}</title>
 				<link rel="icon" href={appLogoFavicon || "/default-favicon.ico"} />
 			</Helmet>
 			<div className={classes.root}>
@@ -243,7 +243,7 @@ const Login = () => {
 							)}
 						</form>
 					</div>
-					{/*<Box> Copyright 2024 - GBSOficial </Box>*/}
+					{/*<Box> Copyright 2024 - ZAPRUN </Box>*/}
 				</Container>
 				</div>
 				{/*Esquerda */}

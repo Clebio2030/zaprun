@@ -21,25 +21,24 @@ sudo systemctl start nginx
 sudo systemctl start nginx
 sudo systemctl start postgresql
 
-BUILDAR BACKEND:
+### BUILDAR BACKEND:
 
-cd /home/deploy/zaprun/backend
+> cd /home/deploy/zaprun/backend
 
-rm -rf dist
+> rm -rf dist
 
-NPM RUN BUILD
+> NPM RUN BUILD
 
-BUILDAR FRONTEND:
+### BUILDAR FRONTEND:
 
-cd /home/deploy/zaprun/frontend
+> cd /home/deploy/zaprun/frontend
 
-rm -rf build
+> rm -rf build
 
-NODE_OPTIONS=--openssl-legacy-provider npm run build
+> NODE_OPTIONS=--openssl-legacy-provider npm run build
 
 
-Restarurar estado antigo.
-
+### Restarurar estado antigo para o último commit feito na branch
 
 git reset --hard origin/branch_name
 git clean -fd

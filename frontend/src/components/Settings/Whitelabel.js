@@ -332,7 +332,7 @@ export default function Whitelabel(props) {
                     }}
                     onBlur={async (_) => {
                       await handleSaveSetting("appName", appName);
-                      colorMode.setAppName(appName || "GBSOFICIAL");
+                      colorMode.setAppName(appName || "ZAPRUN");
                     }}
                   />
                 </FormControl>

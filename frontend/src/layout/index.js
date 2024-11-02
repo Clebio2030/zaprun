@@ -553,7 +553,7 @@ const LoggedInLayout = ({ children, themeToggle }) => {
               onClick={handleMenu}
             >
               <Avatar
-                alt="GBSOFICIAL"
+                alt="ZAPRUN"
                 className={classes.avatar2}
                 src={profileUrl}
               />

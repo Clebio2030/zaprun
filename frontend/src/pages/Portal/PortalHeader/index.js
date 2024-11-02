@@ -11,7 +11,7 @@ const PortalHeader = () => {
                 <li><a href="/politica">Políticas de privacidade</a></li>
                 <li><a href="#">Termos de Uso</a></li>
             </ul>
-            <p class="powered">Powered by GBSOficial</p>
+            <p class="powered">Powered by ZAPRUN</p>
         </header>
     );
 };

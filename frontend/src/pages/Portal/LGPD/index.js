@@ -9,8 +9,8 @@ const PoliticaPrivacidade = () => {
             </h2>
             <p>
                 <span style={{ color: 'rgb(68, 68, 68)' }}>
-                    A sua privacidade é importante para nós. É política do GBSOficial respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site&nbsp; 
-                    <a href="https://www.app.gbsoficial.life">GBSOficial</a>, e outros sites que possuímos e operamos.
+                    A sua privacidade é importante para nós. É política do ZAPRUN respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site&nbsp; 
+                    <a href="https://www.app.gbsoficial.life">ZAPRUN</a>, e outros sites que possuímos e operamos.
                 </span>
             </p>
             <p>
@@ -70,7 +70,7 @@ const PoliticaPrivacidade = () => {
             </h3>
             <p>
                 <span style={{ color: 'rgb(68, 68, 68)' }}>
-                    O usuário se compromete a fazer uso adequado dos conteúdos e da informação que o GBSOficial oferece no site e com caráter enunciativo, mas não limitativo:
+                    O usuário se compromete a fazer uso adequado dos conteúdos e da informação que o ZAPRUN oferece no site e com caráter enunciativo, mas não limitativo:
                 </span>
             </p>
             <ul>
@@ -87,7 +87,7 @@ const PoliticaPrivacidade = () => {
                 </li>
                 <li>
                     <span style={{ color: 'rgb(68, 68, 68)' }}>
-                        C) Não causar danos aos sistemas físicos (hardwares) e lógicos (softwares) do GBSOficial, de seus fornecedores ou terceiros, para introduzir ou disseminar vírus informáticos ou quaisquer outros sistemas de hardware ou software que sejam capazes de causar danos anteriormente mencionados.
+                        C) Não causar danos aos sistemas físicos (hardwares) e lógicos (softwares) do ZAPRUN, de seus fornecedores ou terceiros, para introduzir ou disseminar vírus informáticos ou quaisquer outros sistemas de hardware ou software que sejam capazes de causar danos anteriormente mencionados.
                     </span>
                 </li>
             </ul>

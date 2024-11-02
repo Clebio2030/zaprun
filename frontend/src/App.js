@@ -168,10 +168,10 @@ const App = () => {
       });
     getPublicSetting("appName")
       .then((name) => {
-        setAppName(name || "GBSOficial");
+        setAppName(name || "ZAPRUN");
       })
       .catch((error) => {
-        setAppName("GBSOficial");
+        setAppName("ZAPRUN");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
