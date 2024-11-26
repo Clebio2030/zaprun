@@ -426,6 +426,18 @@ const MainListItems = ({ collapsed, drawerClose }) => {
               }}
             >
               <Can
+                role={user.profile === "user" && user.allowRealTime === "enabled" ? "admin" : user.profile}
+                perform={"drawer-admin-items:view"}
+                yes={() => (
+                  <ListItemLink
+                    to="/moments"
+                    primary={i18n.t("mainDrawer.listItems.chatsTempoReal")}
+                    icon={<GridOn />}
+                    tooltip={collapsed}
+                  />
+                )}
+              />
+              <Can
                 role={user.profile === "user" && user.showDashboard === "enabled" ? "admin" : user.profile}
                 perform={"drawer-admin-items:view"}
                 yes={() => (
@@ -445,18 +457,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                       tooltip={collapsed}
                     />
                   </>
-                )}
-              />
-              <Can
-                role={user.profile === "user" && user.allowRealTime === "enabled" ? "admin" : user.profile}
-                perform={"drawer-admin-items:view"}
-                yes={() => (
-                  <ListItemLink
-                    to="/moments"
-                    primary={i18n.t("mainDrawer.listItems.chatsTempoReal")}
-                    icon={<GridOn />}
-                    tooltip={collapsed}
-                  />
                 )}
               />
             </Collapse>
@@ -767,14 +767,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 />
               )}
             />
-            {user.super && (
-              <ListItemLink
-                to="/allConnections"
-                primary={i18n.t("mainDrawer.listItems.allConnections")}
-                icon={<PhonelinkSetup />}
-                tooltip={collapsed}
-              />
-            )}
             <Can
               role={user.profile}
               perform="dashboard:view"
@@ -786,50 +778,58 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                   tooltip={collapsed}
                 />
               )}
-            />
+              />
             <Can
               role={user.profile}
               perform="dashboard:view"
               yes={() => (
                 <ListItemLink
-                  to="/financeiro"
-                  primary={i18n.t("mainDrawer.listItems.financeiro")}
-                  icon={<LocalAtmIcon />}
-                  tooltip={collapsed}
+                to="/financeiro"
+                primary={i18n.t("mainDrawer.listItems.financeiro")}
+                icon={<LocalAtmIcon />}
+                tooltip={collapsed}
                 />
               )}
-            />
+              />
             <Can
               role={user.profile}
               perform="dashboard:view"
               yes={() => (
                 <ListItemLink
-                  to="/settings"
-                  primary={i18n.t("mainDrawer.listItems.settings")}
+                to="/settings"
+                primary={i18n.t("mainDrawer.listItems.settings")}
                   icon={<SettingsOutlinedIcon />}
                   tooltip={collapsed}
+                  />
+                )}
                 />
-              )}
-            />
             {/* {user.super && (
               <ListSubheader inset>
-                {i18n.t("mainDrawer.listItems.administration")}
+              {i18n.t("mainDrawer.listItems.administration")}
               </ListSubheader>
-            )} */}
+              )} */}
 
             {user.super && (
               <ListItemLink
-                to="/companies"
-                primary={i18n.t("mainDrawer.listItems.companies")}
-                icon={<BusinessIcon />}
-                tooltip={collapsed}
+              to="/companies"
+              primary={i18n.t("mainDrawer.listItems.companies")}
+              icon={<BusinessIcon />}
+              tooltip={collapsed}
               />
             )}
 
+{user.super && (
+  <ListItemLink
+    to="/allConnections"
+    primary={i18n.t("mainDrawer.listItems.allConnections")}
+    icon={<PhonelinkSetup />}
+    tooltip={collapsed}
+  />
+)}
           </>
 
-        )}
-      />
+)}
+/>
       {!collapsed && (
         <React.Fragment>
           <Divider />
@@ -840,7 +840,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
               textAlign: "center",
               fontWeight: "bold",
             }}
-          >
+            >
             {`v.2.0.0`}
           </Typography>
         </React.Fragment>

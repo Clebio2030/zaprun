@@ -866,32 +866,32 @@ const messages = {
       mainDrawer: {
         listItems: {
           dashboard: "Dashboard",
-          connections: "Conexões",
-          chatsTempoReal: "Painel",
+          connections: "Conexões ZapRun",
+          chatsTempoReal: "Painel Geral",
           tickets: "Atendimentos",
           quickMessages: "Respostas rápidas",
-          contacts: "Contatos",
+          contacts: "Clientes",
           queues: "Filas & Chatbot",
           tags: "Tags",
           administration: "Administração",
-          companies: "Empresas",
+          companies: "ADM Empresas",
           users: "Usuários",
           settings: "Configurações",
           files: "Lista de arquivos",
-          helps: "Ajuda",
+          helps: "Central de Ajuda",
           messagesAPI: "API",
           schedules: "Agendamentos",
-          campaigns: "Campanhas",
-          annoucements: "Informativos",
+          campaigns: "Marketing",
+          annoucements: "Avisos",
           chats: "Chat Interno",
           financeiro: "Financeiro",
           queueIntegration: "Integrações",
           version: "Versão",
           kanban: "Kanban",
-          prompts: "Talk.Ai",
-          allConnections: "Gerenciar conexões",
-          reports: "Relatórios",
-          management: "Gerência"
+          prompts: "Inteligência Artificial",
+          allConnections: "ADM Conexões",
+          reports: "Visão Analítica",
+          management: "Gestão Inteligente"
         },
         appBar: {
           user: {
@@ -1081,12 +1081,12 @@ const messages = {
       },
 
       campaigns: {
-        title: "Campanhas",
+        title: "Marketing",
         searchPlaceholder: "Pesquisa",
         subMenus: {
-          list: "Listagem",
+          list: "Campanhas",
           listContacts: "Lista de contatos",
-          settings: "Configurações",
+          settings: "Ajustes",
         },
         settings: {
           randomInterval: "Intervalo Randômico de Disparo",
