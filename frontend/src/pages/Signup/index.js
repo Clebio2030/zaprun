@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     },
     leftSide: {
         flex: 1,
-        backgroundImage: "url(https://static.vecteezy.com/ti/vetor-gratis/p3/443376-bate-papo-plano-de-fundo-vetor.jpg)",
+        backgroundImage: "url(/backgroundlogin.gif)",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex',
