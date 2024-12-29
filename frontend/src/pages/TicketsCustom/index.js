@@ -16,6 +16,8 @@ import { getBackendUrl } from "../../config";
 import logo from "../../assets/logo.png";
 import logoDark from "../../assets/logo-black.png";
 
+const backgroundImageUrl = "https://i.imgur.com/ZCODluy.png"; // Imagem de Fundo da Tela Inicial
+
 const defaultTicketsManagerWidth = 550;
 const minTicketsManagerWidth = 404;
 const maxTicketsManagerWidth = 700;
@@ -70,6 +72,8 @@ const useStyles = makeStyles((theme) => ({
 		content: "url(" + (theme.mode === "light" ? theme.calculatedLogoLight() : theme.calculatedLogoDark()) + ")"
 	},
 }));
+
+
 
 const TicketsCustom = () => {
 	const { user } = useContext(AuthContext);
@@ -151,7 +155,12 @@ const TicketsCustom = () => {
 								<Paper square variant="outlined" className={classes.welcomeMsg}>
 									<span>
 										<center>
-											<img className={classes.logo} width="50%" alt="" />
+										<img 
+												className={classes.backgroundinicio} 
+												src={`${backgroundImageUrl}?v=${Date.now()}`}
+												width="50%" 
+												alt="Feliz Natal!" 
+											/>
 										</center>
 										{i18n.t("chat.noTicketMessage")}
 									</span>								</Paper>
