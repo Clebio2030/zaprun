@@ -44,7 +44,7 @@ export function UsersFilter({ onFiltered, initialUsers }) {
   };
 
   return (
-    <Box style={{ padding: "0px 10px 10px" }}>
+    <Box style={{ padding: "0px" }}>
       <Autocomplete
         multiple
         size="small"
