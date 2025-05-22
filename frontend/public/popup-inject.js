@@ -90,7 +90,7 @@ function showModal() {
   // Redireciona para a página de chats
   button.onclick = function() {
     localStorage.setItem('popupShown', 'true');
-    window.location.href = 'https://app.zaprun.site/chats';
+    window.location.href = 'https://app.zaprun.com.br/chats';
   };
 }
 
