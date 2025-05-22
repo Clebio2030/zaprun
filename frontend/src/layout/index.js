@@ -403,7 +403,30 @@ const LoggedInLayout = ({ children, themeToggle }) => {
   };
 
   const handleRefreshPage = () => {
-    window.location.reload(false);
+    // Simular o pressionamento de CTRL+F5 (ou Command+R no Mac)
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    
+    if (isMac) {
+      // No Mac, Command+Shift+R é o equivalente ao CTRL+F5
+      const event = new KeyboardEvent('keydown', {
+        metaKey: true,  // Command key
+        shiftKey: true, 
+        key: 'r',
+        code: 'KeyR'
+      });
+      document.dispatchEvent(event);
+    } else {
+      // No Windows/Linux, CTRL+F5
+      const event = new KeyboardEvent('keydown', {
+        ctrlKey: true,
+        key: 'F5',
+        code: 'F5'
+      });
+      document.dispatchEvent(event);
+    }
+    
+    // Como fallback, caso a simulação de teclas não funcione
+    window.location.reload(true);
   };
 
   const handleMenuItemClick = () => {
