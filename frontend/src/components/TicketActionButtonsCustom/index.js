@@ -453,7 +453,8 @@ const TicketActionButtonsCustom = ({ ticket
                             <IconButton className={classes.bottomButtonVisibilityIcon}>
                                 <Tooltip title={i18n.t("messagesList.header.buttons.resolve")}>
                                     <HighlightOffIcon
-                                        // color="primary"
+                                        color="primary"
+                                        style={{ fontSize: '1.8rem' }}
                                         onClick={handleClickOpen}
                                     />
                                 </Tooltip>
@@ -462,7 +463,8 @@ const TicketActionButtonsCustom = ({ ticket
                             <IconButton className={classes.bottomButtonVisibilityIcon}>
                                 <Tooltip title={i18n.t("tickets.buttons.returnQueue")}>
                                     <UndoIcon
-                                        // color="primary"
+                                        color="primary"
+                                        style={{ fontSize: '1.8rem' }}
                                         onClick={(e) => handleUpdateTicketStatus(e, "pending", null)}
                                     />
                                 </Tooltip>
@@ -471,7 +473,8 @@ const TicketActionButtonsCustom = ({ ticket
                             <IconButton className={classes.bottomButtonVisibilityIcon}>
                                 <Tooltip title="Transferir Ticket">
                                     <SwapHorizOutlined
-                                        // color="primary"
+                                        color="primary"
+                                        style={{ fontSize: '1.8rem' }}
                                         onClick={handleOpenTransferModal}
                                     />
                                 </Tooltip>

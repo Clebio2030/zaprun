@@ -588,8 +588,21 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                     <span className={classes.secondaryContentSecond}>
                         {(ticket.status === "pending" && (ticket.queueId === null || ticket.queueId === undefined)) && (
                             <ButtonWithSpinner
-                                //color="primary"
-                                style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none', color: theme.mode === "light" ? "#0872B9" : "#FFF", padding: '0px', borderRadius: "50%", right: '51px', fontSize: '0.6rem', bottom: '-30px', minWidth: '2em', width: 'auto' }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    border: 'none',
+                                    color: theme.palette.primary.main,
+                                    padding: '8px',
+                                    borderRadius: '50%',
+                                    right: '51px',
+                                    minWidth: '40px',
+                                    height: '40px',
+                                    width: '40px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
                                 variant="contained"
                                 className={classes.acceptButton}
                                 size="small"
@@ -597,7 +610,7 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                                 onClick={e => handleOpenAcceptTicketWithouSelectQueue()}
                             >
                                 <Tooltip title={`${i18n.t("ticketsList.buttons.accept")}`}>
-                                    <Done />
+                                    <Done style={{ fontSize: '1.9rem' }} />
                                 </Tooltip>
                             </ButtonWithSpinner>
                         )}
@@ -605,8 +618,21 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                     <span className={classes.secondaryContentSecond} >
                         {(ticket.status === "pending" && ticket.queueId !== null) && (
                             <ButtonWithSpinner
-                                //color="primary"
-                                style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none', color: theme.mode === "light" ? "#0872B9" : "#FFF", padding: '0px', borderRadius: "50%", right: '51px', fontSize: '0.6rem', bottom: '-30px', minWidth: '2em', width: 'auto' }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    border: 'none',
+                                    color: theme.palette.primary.main,
+                                    padding: '8px',
+                                    borderRadius: '50%',
+                                    right: '51px',
+                                    minWidth: '40px',
+                                    height: '40px',
+                                    width: '40px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
                                 variant="contained"
                                 className={classes.acceptButton}
                                 size="small"
@@ -614,7 +640,7 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                                 onClick={e => handleAcepptTicket(ticket.id)}
                             >
                                 <Tooltip title={`${i18n.t("ticketsList.buttons.accept")}`}>
-                                    <Done />
+                                    <Done style={{ fontSize: '1.9rem' }} />
                                 </Tooltip>
                             </ButtonWithSpinner>
                         )}
@@ -622,17 +648,30 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                     <span className={classes.secondaryContentSecond1} >
                         {(ticket.status === "pending" || ticket.status === "open" || ticket.status === "group") && (
                             <ButtonWithSpinner
-                                //color="primary"
-                                style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none', color: theme.mode === "light" ? "#0872B9" : "#FFF", padding: '0px', borderRadius: "50%", right: '26px', position: 'absolute', fontSize: '0.6rem', bottom: '-30px', minWidth: '2em', width: 'auto' }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    border: 'none',
+                                    color: theme.palette.primary.main,
+                                    padding: '8px',
+                                    borderRadius: '50%',
+                                    right: '26px',
+                                    position: 'absolute',
+                                    minWidth: '40px',
+                                    height: '40px',
+                                    width: '40px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
                                 variant="contained"
                                 className={classes.acceptButton}
                                 size="small"
                                 loading={loading}
                                 onClick={handleOpenTransferModal}
                             >
-                                {/* {i18n.t("ticketsList.buttons.transfer")} */}
                                 <Tooltip title={`${i18n.t("ticketsList.buttons.transfer")}`}>
-                                    <SwapHoriz />
+                                    <SwapHoriz style={{ fontSize: '1.7rem' }} />
                                 </Tooltip>
                             </ButtonWithSpinner>
                         )}
@@ -640,8 +679,21 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                     <span className={classes.secondaryContentSecond} >
                         {(ticket.status === "open" || ticket.status === "group") && (
                             <ButtonWithSpinner
-                                //color="primary"
-                                style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none', color: theme.mode === "light" ? "#0872B9" : "#FFF", padding: '0px', bottom: '0px', borderRadius: "50%", right: '1px', fontSize: '0.6rem', bottom: '-30px', minWidth: '2em', width: 'auto' }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    border: 'none',
+                                    color: theme.palette.primary.main,
+                                    padding: '8px',
+                                    borderRadius: '50%',
+                                    right: '1px',
+                                    minWidth: '40px',
+                                    height: '40px',
+                                    width: '40px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
                                 variant="contained"
                                 className={classes.acceptButton}
                                 size="small"
@@ -649,8 +701,7 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                                 onClick={e => handleCloseTicket(ticket.id)}
                             >
                                 <Tooltip title={`${i18n.t("ticketsList.buttons.closed")}`}>
-                                    <HighlightOff />
-                                    {/*  */}
+                                    <HighlightOff style={{ fontSize: '1.7rem' }} />
                                 </Tooltip>
                             </ButtonWithSpinner>
                         )}
@@ -658,8 +709,21 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                     <span className={classes.secondaryContentSecond} >
                         {((ticket.status === "pending" || ticket.status === "lgpd") && (user.userClosePendingTicket === "enabled" || user.profile === "admin")) && (
                             <ButtonWithSpinner
-                                //color="primary"
-                                style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none', color: theme.mode === "light" ? "#0872B9" : "#FFF", padding: '0px', bottom: '0px', borderRadius: "50%", right: '1px', fontSize: '0.6rem', bottom: '-30px', minWidth: '2em', width: 'auto' }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    border: 'none',
+                                    color: theme.palette.primary.main,
+                                    padding: '8px',
+                                    borderRadius: '50%',
+                                    right: '1px',
+                                    minWidth: '40px',
+                                    height: '40px',
+                                    width: '40px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
                                 variant="contained"
                                 className={classes.acceptButton}
                                 size="small"
@@ -667,7 +731,7 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                                 onClick={e => handleCloseIgnoreTicket(ticket.id)}
                             >
                                 <Tooltip title={`${i18n.t("ticketsList.buttons.ignore")}`}>
-                                    <HighlightOff />
+                                    <HighlightOff style={{ fontSize: '1.7rem' }} />
                                 </Tooltip>
                             </ButtonWithSpinner>
                         )}
@@ -675,8 +739,21 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                     <span className={classes.secondaryContentSecond} >
                         {(ticket.status === "closed" && (ticket.queueId === null || ticket.queueId === undefined)) && (
                             <ButtonWithSpinner
-                                //color="primary"
-                                style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none', color: theme.mode === "light" ? "#0872B9" : "#FFF", padding: '0px', bottom: '0px', borderRadius: "50%", right: '1px', fontSize: '0.6rem', bottom: '-30px', minWidth: '2em', width: 'auto' }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    border: 'none',
+                                    color: theme.palette.primary.main,
+                                    padding: '8px',
+                                    borderRadius: '50%',
+                                    right: '1px',
+                                    minWidth: '40px',
+                                    height: '40px',
+                                    width: '40px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
                                 variant="contained"
                                 className={classes.acceptButton}
                                 size="small"
@@ -684,7 +761,7 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                                 onClick={e => handleOpenAcceptTicketWithouSelectQueue()}
                             >
                                 <Tooltip title={`${i18n.t("ticketsList.buttons.reopen")}`}>
-                                    <Replay />
+                                    <Replay style={{ fontSize: '1.8rem' }} />
                                 </Tooltip>
                             </ButtonWithSpinner>
 
@@ -693,8 +770,21 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                     <span className={classes.secondaryContentSecond} >
                         {(ticket.status === "closed" && ticket.queueId !== null) && (
                             <ButtonWithSpinner
-                                //color="primary"
-                                style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none', color: theme.mode === "light" ? "#0872B9" : "#FFF", padding: '0px', bottom: '0px', borderRadius: "50%", right: '1px', fontSize: '0.6rem', bottom: '-30px', minWidth: '2em', width: 'auto' }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    border: 'none',
+                                    color: theme.palette.primary.main,
+                                    padding: '8px',
+                                    borderRadius: '50%',
+                                    right: '1px',
+                                    minWidth: '40px',
+                                    height: '40px',
+                                    width: '40px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
                                 variant="contained"
                                 className={classes.acceptButton}
                                 size="small"
@@ -702,7 +792,7 @@ const TicketListItemCustom = ({ setTabOpen, ticket }) => {
                                 onClick={e => handleAcepptTicket(ticket.id)}
                             >
                                 <Tooltip title={`${i18n.t("ticketsList.buttons.reopen")}`}>
-                                    <Replay />
+                                    <Replay style={{ fontSize: '1.8rem' }} />
                                 </Tooltip>
                             </ButtonWithSpinner>
 
