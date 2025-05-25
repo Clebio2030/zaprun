@@ -7,10 +7,11 @@ import { toast } from "react-toastify";
 import { i18n } from "../../translate/i18n";
 import { useHistory } from 'react-router-dom';
 import { Facebook, Instagram, WhatsApp } from "@material-ui/icons";
-import { Badge, Tooltip, Typography, Button, TextField, Box } from "@material-ui/core";
+import { Badge, Tooltip, Typography, Button, TextField, Box, IconButton, Popover } from "@material-ui/core";
 import { format, isSameDay, parseISO } from "date-fns";
 import { Can } from "../../components/Can";
 import Avatar from "@material-ui/core/Avatar";
+import FilterListIcon from "@material-ui/icons/FilterList";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,11 +19,12 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     padding: theme.spacing(1),
+    paddingLeft: theme.spacing(3), // Adicionando padding à esquerda para afastar da sidebar
   },
   kanbanContainer: {
     width: "100%",
-    maxWidth: "1200px",
-    margin: "0 auto",
+    maxWidth: "1800px",
+    marginLeft: 0,
   },
   connectionTag: {
     background: "green",
@@ -58,6 +60,24 @@ const useStyles = makeStyles(theme => ({
   },
   dateInput: {
     marginRight: theme.spacing(2),
+    width: "150px",
+  },
+  filterContainer: {
+    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    gap: theme.spacing(2),
+  },
+  filterButton: {
+    marginRight: theme.spacing(1),
+  },
+  actionsContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+    maxWidth: '1800px',
+    gap: theme.spacing(2),
   },
 }));
 
@@ -72,6 +92,9 @@ const Kanban = () => {
   const [file, setFile] = useState({ lanes: [] });
   const [startDate, setStartDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const [endDate, setEndDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  // Estados para controlar o popover de filtro
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openFilter = Boolean(anchorEl);
 
   const jsonString = user.queues.map(queue => queue.UserQueue.queueId);
 
@@ -124,6 +147,7 @@ const Kanban = () => {
 
   const handleSearchClick = () => {
     fetchTickets();
+    setAnchorEl(null); // Fecha o popover após a busca
   };
 
   const handleStartDateChange = (event) => {
@@ -132,6 +156,15 @@ const Kanban = () => {
 
   const handleEndDateChange = (event) => {
     setEndDate(event.target.value);
+  };
+
+  // Funções para controlar o popover de filtro
+  const handleFilterClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleFilterClose = () => {
+    setAnchorEl(null);
   };
 
   const IconChannel = (channel) => {
@@ -257,9 +290,9 @@ const Kanban = () => {
   const handleCardMove = async (cardId, sourceLaneId, targetLaneId) => {
     try {
       await api.delete(`/ticket-tags/${targetLaneId}`);
-      toast.success('Ticket Tag Removido!');
+      toast.success('Ticket Removido!');
       await api.put(`/ticket-tags/${targetLaneId}/${sourceLaneId}`);
-      toast.success('Ticket Tag Adicionado com Sucesso!');
+      toast.success('Ticket Adicionado com Sucesso!');
       await fetchTickets(jsonString);
       popularCards(jsonString);
     } catch (err) {
@@ -273,39 +306,64 @@ const Kanban = () => {
 
   return (
     <div className={classes.root}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', width: '100%', maxWidth: '1200px' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <TextField
-            label="Data de início"
-            type="date"
-            value={startDate}
-            onChange={handleStartDateChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-            className={classes.dateInput}
-          />
-          <Box mx={1} />
-          <TextField
-            label="Data de fim"
-            type="date"
-            value={endDate}
-            onChange={handleEndDateChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-            className={classes.dateInput}
-          />
-          <Box mx={1} />
-          <Button
-            variant="contained"
+      <div className={classes.actionsContainer}>
+        <div>
+          <IconButton 
             color="primary"
-            onClick={handleSearchClick}
+            className={classes.filterButton}
+            onClick={handleFilterClick}
+            aria-label="Filtrar por data"
           >
-            Buscar
-          </Button>
+            <FilterListIcon />
+          </IconButton>
+          <Popover
+            open={openFilter}
+            anchorEl={anchorEl}
+            onClose={handleFilterClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+            <div className={classes.filterContainer}>
+              <TextField
+                label="Data de início"
+                type="date"
+                value={startDate}
+                onChange={handleStartDateChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                size="small"
+                className={classes.dateInput}
+              />
+              <TextField
+                label="Data de fim"
+                type="date"
+                value={endDate}
+                onChange={handleEndDateChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                size="small"
+                className={classes.dateInput}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSearchClick}
+                fullWidth
+              >
+                Buscar
+              </Button>
+            </div>
+          </Popover>
         </div>
         <Can role={user.profile} perform="dashboard:view" yes={() => (
           <Button
