@@ -1,0 +1,95 @@
+[33mcommit a46b13a23ae0f7c465509645fac08fb89e7e2fb6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Clebio <134241152+Clebio2030@users.noreply.github.com>
+Date:   Sun May 25 20:30:03 2025 -0300
+
+    Ajuste botões modo escuro
+
+[33mcommit adcdfb2acbfce116a9d7759ee0512fd4dd0623ee[m
+Author: Clebio <134241152+Clebio2030@users.noreply.github.com>
+Date:   Sun May 25 19:55:31 2025 -0300
+
+    Melhoria botões de atendimento
+
+[33mcommit db0c842a8cdbfa058516933b3338767a4e181ba4[m
+Author: Clebio <134241152+Clebio2030@users.noreply.github.com>
+Date:   Sun May 25 19:53:16 2025 -0300
+
+    Ajuste visual Kanban
+
+[33mcommit 91319301d66f9f679d647dd96edf618da16dffa9[m
+Author: Clebio <134241152+Clebio2030@users.noreply.github.com>
+Date:   Thu May 22 00:04:32 2025 -0300
+
+    link do pop-up corrigido
+
+[33mcommit c52cf7e48bc68c9c03d6c6ae39410544925b8307[m
+Author: Clebio <134241152+Clebio2030@users.noreply.github.com>
+Date:   Wed May 21 23:52:37 2025 -0300
+
+    PopUp de Atualização e forçazão com o service worker
+
+[33mcommit 7514d4fbccbf78163b6722ea53c8551b0a395520[m
+Author: Clebio <134241152+Clebio2030@users.noreply.github.com>
+Date:   Wed May 21 01:07:10 2025 -0300
+
+    Criação de Boas-Vindas
+
+[33mcommit db16b254361c2fcdcab0cb1627d5e4282a67ab99[m
+Author: Clebio <134241152+Clebio2030@users.noreply.github.com>
+Date:   Wed May 21 00:54:57 2025 -0300
+
+    Novo Chat Interno
+
+[33mcommit e5d475dcb399d7cfbb565cd29c813b4dddcf0029[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Sun Dec 29 00:22:51 2024 -0300
+
+    Atualização do background inicial na tela por URL
+
+[33mcommit b3ab8ce379c214d2b851a4599b1965b1da009dad[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Sun Dec 15 19:52:06 2024 -0300
+
+    Atualização de Ícones gerais para Android/PC e cores padrões
+
+[33mcommit f1968654570035cab1f59b8354ab71853e378246[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Tue Nov 26 01:30:43 2024 -0300
+
+    Mudando background de login
+
+[33mcommit d577b17cf43b2f3bd784f1aa7fb2b9f38310b4ff[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Tue Nov 26 00:05:21 2024 -0300
+
+    Nomes das telas do menu mudadas
+
+[33mcommit 3920acd0491ce7228a7e7675d2bb5a4676b36475[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Sat Nov 2 20:51:34 2024 -0300
+
+    Trocar nome de GBSOFICIAL para ZAPRUN
+
+[33mcommit 113201ef48ddd911692bb6bb1fd7172e2359c98e[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Sat Nov 2 20:35:06 2024 -0300
+
+    Cores botão de login
+
+[33mcommit 526d5860c25e7f2d60e4c4990fd82a6435869a6b[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Sat Nov 2 20:01:41 2024 -0300
+
+    Arquivos Logotipo
+
+[33mcommit 1660187a64cf3dfc5e80831f83a0f401fd1c5552[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Sat Nov 2 19:40:43 2024 -0300
+
+    Atualização do backend devido ao problema do flowbuilder online - Corrigido pelo Biel
+
+[33mcommit 54feecf11bd109bb8fb7fbd0821e4af38c1a40cc[m
+Author: Clebio2030 <Clebiodasivla285@Gmail.com>
+Date:   Fri Nov 1 00:47:31 2024 -0300
+
+    fonte original
