@@ -154,7 +154,7 @@ const SettingsCustom = () => {
             >
               <Tab label={i18n.t("settings.tabs.options")} value={"options"} />
               {schedulesEnabled && <Tab label="Horários" value={"schedules"} />}
-              <Tab label="Boas-vindas" value={"welcomeMedia"} />
+              {isSuper() && <Tab label="Boas-vindas" value={"welcomeMedia"} />}
               {isSuper() ? <Tab label="Empresas" value={"companies"} /> : null}
               {isSuper() ? <Tab label={i18n.t("settings.tabs.plans")} value={"plans"} /> : null}
               {isSuper() ? <Tab label={i18n.t("settings.tabs.helps")} value={"helps"} /> : null}
@@ -172,6 +172,7 @@ const SettingsCustom = () => {
                   initialValues={schedules}
                 />
               </TabPanel>
+              {isSuper() && (
               <TabPanel
                 className={classes.container}
                 value={tab}
@@ -179,6 +180,7 @@ const SettingsCustom = () => {
               >
                 <WelcomeMedia />
               </TabPanel>
+              )}
               <OnlyForSuperUser
                 user={currentUser}
                 yes={() => (

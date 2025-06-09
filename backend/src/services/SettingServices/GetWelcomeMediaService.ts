@@ -16,21 +16,21 @@ const GetWelcomeMediaService = async ({
   const type = await Setting.findOne({
     where: {
       key: "welcomeMediaType",
-      companyId
+      companyId: null
     }
   });
 
   const url = await Setting.findOne({
     where: {
       key: "welcomeMediaUrl",
-      companyId
+      companyId: null
     }
   });
 
   const width = await Setting.findOne({
     where: {
       key: "welcomeMediaWidth",
-      companyId
+      companyId: null
     }
   });
 

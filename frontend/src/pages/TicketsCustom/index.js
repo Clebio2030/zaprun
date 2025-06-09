@@ -80,12 +80,16 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		flexDirection: 'column',
 		padding: '20px',
+		height: '100%',
+		overflow: 'hidden',
 	},
 	youtubeContainer: {
 		position: 'relative',
 		paddingTop: '56.25%', // Proporção 16:9
 		borderRadius: '8px',
 		overflow: 'hidden',
+		maxWidth: '100%',
+		width: '100%',
 	},
 	youtubeIframe: {
 		position: 'absolute',
@@ -96,25 +100,30 @@ const useStyles = makeStyles((theme) => ({
 		border: 'none',
 	},
 	welcomeImage: {
+		maxWidth: '100%',
 		height: 'auto',
 		maxHeight: '70vh',
 		objectFit: 'contain',
 		borderRadius: '8px',
 	},
 	welcomeVideo: {
+		maxWidth: '100%',
 		maxHeight: '70vh',
 		borderRadius: '8px',
+		objectFit: 'contain',
 	},
 	welcomeMessage: {
-		marginTop: '20px',
+		marginTop: '40px',
 		maxWidth: '600px',
+		textAlign: 'center',
+		width: '100%'
 	}
 }));
 
 
 
 const TicketsCustom = () => {
-	const { user } = useContext(AuthContext);
+	const { user, socket } = useContext(AuthContext);
 
 	const classes = useStyles({ ticketsManagerWidth: user.defaultTicketsManagerWidth || defaultTicketsManagerWidth });
 
@@ -151,6 +160,24 @@ const TicketsCustom = () => {
 
 			fetchMediaConfig();
 		}, []);
+
+	useEffect(() => {
+		if (!socket) return;
+		const onSettingsEvent = (data) => {
+			if (data.action === "update" && data.setting?.key === "welcomeMediaConfig") {
+				try {
+					const config = JSON.parse(data.setting.value);
+					setMediaConfig(prevConfig => ({ ...prevConfig, ...config }));
+				} catch (e) {
+					console.error("Erro ao atualizar mídia de boas-vindas via socket:", e);
+				}
+			}
+		};
+		socket.on("company-global-settings", onSettingsEvent);
+		return () => {
+			socket.off("company-global-settings", onSettingsEvent);
+		};
+	}, [socket]);
 
 	// useEffect(() => {
 	// 	if (ticketId && currentTicket.uuid === undefined) {
@@ -200,7 +227,7 @@ const TicketsCustom = () => {
 			// Definir estilo baseado na largura configurada pelo usuário
 			const containerStyle = {
 				width: mediaConfig.width || '50%',
-				maxWidth: '800px'
+				maxWidth: '100%',
 			};
 			
 			if (mediaConfig.type === "youtube") {
@@ -232,7 +259,10 @@ const TicketsCustom = () => {
 					<video 
 						className={classes.welcomeVideo}
 						src={mediaConfig.url}
-						style={{ width: mediaConfig.width || '50%' }}
+						style={{ 
+							width: mediaConfig.width || '50%',
+							maxWidth: '100%'
+						}}
 						controls
 						autoPlay
 						muted
@@ -244,7 +274,10 @@ const TicketsCustom = () => {
 					<img 
 						className={classes.welcomeImage}
 						src={`${mediaConfig.url}?v=${Date.now()}`}
-						style={{ width: mediaConfig.width || '50%' }}
+						style={{ 
+							width: mediaConfig.width || '50%',
+							maxWidth: '100%'
+						}}
 						alt="Imagem de boas-vindas" 
 					/>
 				);
@@ -272,11 +305,11 @@ const TicketsCustom = () => {
 						) : (
 							<Hidden only={["sm", "xs"]}>
 								<Paper square variant="outlined" className={classes.welcomeMsg}>
-									<div className={classes.mediaContainer}>
-										{renderMedia()}
-									</div>
 									<div className={classes.welcomeMessage}>
 										{i18n.t("chat.noTicketMessage")}
+									</div>
+									<div className={classes.mediaContainer}>
+										{renderMedia()}
 									</div>
 								</Paper>
 							</Hidden>

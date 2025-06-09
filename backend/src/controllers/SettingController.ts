@@ -11,6 +11,8 @@ import UpdateOneSettingService from "../services/SettingServices/UpdateOneSettin
 import GetPublicSettingService from "../services/SettingServices/GetPublicSettingService";
 import GetWelcomeMediaService from "../services/SettingServices/GetWelcomeMediaService";
 import UpdateWelcomeMediaService from "../services/SettingServices/UpdateWelcomeMediaService";
+import Company from "../models/Company";
+import { Sequelize } from "sequelize";
 
 type LogoRequest = {
   mode: string;
@@ -158,15 +160,15 @@ export const storePrivateFile = async (req: Request, res: Response): Promise<Res
 }
 
 export const getWelcomeMedia = async (req: Request, res: Response): Promise<Response> => {
-  const { companyId } = req.user;
+  // const { companyId } = req.user;
 
-  const mediaConfig = await GetWelcomeMediaService({ companyId });
+  const mediaConfig = await GetWelcomeMediaService({} as any);
 
   return res.status(200).json(mediaConfig);
 };
 
 export const updateWelcomeMedia = async (req: Request, res: Response): Promise<Response> => {
-  const { companyId } = req.user;
+  // const { companyId } = req.user;
   const mediaData = req.body;
 
   if (req.user.profile !== "admin") {
@@ -176,18 +178,39 @@ export const updateWelcomeMedia = async (req: Request, res: Response): Promise<R
   try {
     const mediaConfig = await UpdateWelcomeMediaService({
       mediaData,
-      companyId
+      companyId: undefined as any
     });
 
     const io = getIO();
-    io.of(String(companyId))
-      .emit(`company-${companyId}-settings`, {
-        action: "update",
-        setting: {
-          key: "welcomeMediaConfig",
-          value: JSON.stringify(mediaConfig)
-        }
-      });
+    
+    // Emitir para o namespace global
+    io.of('/').emit("company-global-settings", {
+      action: "update",
+      setting: {
+        key: "welcomeMediaConfig",
+        value: JSON.stringify(mediaConfig)
+      }
+    });
+
+    // Buscar todas as empresas e emitir para cada namespace
+    const companies = await Company.findAll({
+      attributes: ['id']
+    });
+
+    // Emitir para cada namespace de empresa
+    for (const company of companies) {
+      try {
+        io.of(`/${company.id}`).emit("company-global-settings", {
+          action: "update",
+          setting: {
+            key: "welcomeMediaConfig",
+            value: JSON.stringify(mediaConfig)
+          }
+        });
+      } catch (error) {
+        console.error(`Erro ao emitir para empresa ${company.id}:`, error);
+      }
+    }
 
     return res.status(200).json(mediaConfig);
   } catch (error) {

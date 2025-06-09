@@ -67,18 +67,18 @@ const UpdateWelcomeMediaService = async ({
     
     // Buscar ou criar as configurações
     const [typeConfig] = await Setting.findOrCreate({
-      where: { key: "welcomeMediaType", companyId },
-      defaults: { value: type, companyId }
+      where: { key: "welcomeMediaType" },
+      defaults: { value: type }
     });
 
     const [urlConfig] = await Setting.findOrCreate({
-      where: { key: "welcomeMediaUrl", companyId },
-      defaults: { value: url, companyId }
+      where: { key: "welcomeMediaUrl" },
+      defaults: { value: url }
     });
 
     const [widthConfig] = await Setting.findOrCreate({
-      where: { key: "welcomeMediaWidth", companyId },
-      defaults: { value: safeWidth, companyId }
+      where: { key: "welcomeMediaWidth" },
+      defaults: { value: safeWidth }
     });
 
     // Atualizar valores
