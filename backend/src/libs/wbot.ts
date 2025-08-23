@@ -170,7 +170,7 @@ export const initWASocket = async (whatsapp: Whatsapp): Promise<Session> => {
         const { state, saveCreds } = await useMultiFileAuthState(whatsapp);
 
         wsocket = makeWASocket({
-          version: [2, 3000, 1021580394],
+          version: [2, 3000, 1025040637],
           logger: loggerBaileys,
           printQRInTerminal: false,
           // auth: state as AuthenticationState,
