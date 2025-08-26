@@ -5,6 +5,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 
 import api from "../../services/api";
@@ -41,6 +43,8 @@ const Settings = () => {
   const { user, socket } = useContext(AuthContext);
 
   const [settings, setSettings] = useState([]);
+  const [openAIKey, setOpenAIKey] = useState("");
+  const [savingOpenAI, setSavingOpenAI] = useState(false);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -90,8 +94,27 @@ const Settings = () => {
   };
 
   const getSettingValue = (key) => {
-    const { value } = settings.find((s) => s.key === key);
-    return value;
+    const found = settings.find((s) => s.key === key);
+    return found ? found.value : "";
+  };
+
+  useEffect(() => {
+    // popular o campo da chave quando settings carregar
+    if (settings && settings.length) {
+      setOpenAIKey(getSettingValue("openaikeyaudio"));
+    }
+  }, [settings]);
+
+  const handleSaveOpenAIKey = async () => {
+    try {
+      setSavingOpenAI(true);
+      await api.put(`/setting/openaikeyaudio`, { value: openAIKey });
+      toast.success(i18n.t("settings.success"));
+    } catch (err) {
+      toastError(err);
+    } finally {
+      setSavingOpenAI(false);
+    }
   };
 
   return (
@@ -127,6 +150,34 @@ const Settings = () => {
                   {i18n.t("settings.settings.userCreation.options.disabled")}
                 </option>
               </Select>
+            </Paper>
+
+            {/* OpenAI API Key */}
+            <Paper className={classes.paper} style={{ marginTop: 16 }}>
+              <div style={{ width: "100%" }}>
+                <Typography variant="body1" gutterBottom>
+                  OpenAI API Key (Whisper)
+                </Typography>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  size="small"
+                  type="password"
+                  placeholder="cole sua chave da OpenAI aqui"
+                  value={openAIKey}
+                  onChange={(e) => setOpenAIKey(e.target.value)}
+                />
+                <div style={{ marginTop: 8, display: "flex", justifyContent: "flex-end" }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={savingOpenAI}
+                    onClick={handleSaveOpenAIKey}
+                  >
+                    {savingOpenAI ? "Salvando..." : "Salvar chave"}
+                  </Button>
+                </div>
+              </div>
             </Paper>
           </Container>
         </>}

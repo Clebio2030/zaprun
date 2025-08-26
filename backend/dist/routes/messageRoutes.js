@@ -40,4 +40,5 @@ messageRoutes.delete("/messages/:messageId", isAuth_1.default, MessageController
 messageRoutes.post("/messages/edit/:messageId", isAuth_1.default, MessageController.edit);
 messageRoutes.get("/messages-allMe", isAuth_1.default, MessageController.allMe);
 messageRoutes.post('/message/forward', isAuth_1.default, MessageController.forwardMessage);
+messageRoutes.get("/messages/transcribeAudio/:fileName", isAuth_1.default, MessageController.transcribeAudioMessage);
 exports.default = messageRoutes;

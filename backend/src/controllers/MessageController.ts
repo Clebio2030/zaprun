@@ -38,6 +38,7 @@ import CompaniesSettings from "../models/CompaniesSettings";
 import { verifyMessageFace, verifyMessageMedia } from "../services/FacebookServices/facebookMessageListener";
 import EditWhatsAppMessage from "../services/MessageServices/EditWhatsAppMessage";
 import CheckContactNumber from "../services/WbotServices/CheckNumber";
+import TranscribeAudioMessageToText from "../services/MessageServices/TranscribeAudioMessageService";
 
 type IndexQuery = {
   pageNumber: string;
@@ -191,6 +192,40 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
   } catch (error) {
     console.log(error);
     return res.status(400).json({ error: error.message });
+  }
+};
+
+// Transcrição de Áudio (manual via HTTP)
+export const transcribeAudioMessage = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { fileName } = req.params as { fileName: string };
+  const { companyId } = req.user;
+
+  try {
+    const transcribedText = await TranscribeAudioMessageToText(fileName, companyId);
+    if (typeof transcribedText === "string") {
+      const msg = transcribedText;
+      // Mapear mensagens de regra de negócio para códigos HTTP adequados
+      if (msg === "Recurso de transcrição de áudio não habilitado no plano da empresa.") {
+        return res.status(403).send({ error: msg });
+      }
+      if (msg === "Arquivo não encontrado" || msg === "Empresa não encontrada") {
+        return res.status(404).send({ error: msg });
+      }
+      if (msg.startsWith("Token OpenAI não configurado")) {
+        return res.status(400).send({ error: msg });
+      }
+      // Falhas internas ao verificar configurações/plano permanecem 500
+      return res.status(500).send({ error: msg });
+    }
+    return res.send(transcribedText);
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .send({ error: "Erro ao transcrever a mensagem de áudio." });
   }
 };
 

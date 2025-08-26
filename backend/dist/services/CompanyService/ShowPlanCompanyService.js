@@ -29,6 +29,7 @@ const ShowPlanCompanyService = async (id) => {
                     "useExternalApi",
                     "useKanban",
                     "useOpenAi",
+                    "useAudioTranscription",
                     "useIntegrations"
                 ]
             },

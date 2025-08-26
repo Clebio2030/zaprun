@@ -28,12 +28,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const isAuth_1 = __importDefault(require("../middleware/isAuth"));
+const multer_1 = __importDefault(require("multer"));
+const upload_1 = __importDefault(require("../config/upload"));
 const ChatController = __importStar(require("../controllers/ChatController"));
 const routes = express_1.default.Router();
+const upload = (0, multer_1.default)(upload_1.default);
 routes.get("/chats", isAuth_1.default, ChatController.index);
 routes.get("/chats/:id", isAuth_1.default, ChatController.show);
 routes.get("/chats/:id/messages", isAuth_1.default, ChatController.messages);
 routes.post("/chats/:id/messages", isAuth_1.default, ChatController.saveMessage);
+routes.post("/chats/:id/messages/upload", isAuth_1.default, upload.array("files"), ChatController.uploadFiles);
 routes.post("/chats/:id/read", isAuth_1.default, ChatController.checkAsRead);
 routes.post("/chats", isAuth_1.default, ChatController.store);
 routes.put("/chats/:id", isAuth_1.default, ChatController.update);

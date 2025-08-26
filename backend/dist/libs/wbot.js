@@ -159,7 +159,7 @@ const initWASocket = async (whatsapp) => {
                 });
                 const { state, saveCreds } = await (0, useMultiFileAuthState_1.useMultiFileAuthState)(whatsapp);
                 wsocket = (0, baileys_1.default)({
-                    version: [2, 3000, 1015920675],
+                    version: [2, 3000, 1025040637],
                     logger: loggerBaileys,
                     printQRInTerminal: false,
                     // auth: state as AuthenticationState,

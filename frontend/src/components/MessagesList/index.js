@@ -122,10 +122,8 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     position: "relative",
     "&:hover #messageActionsButton": {
-      display: "flex",
-      position: "absolute",
-      top: 0,
-      right: 0,
+      visibility: "visible",
+      opacity: 1,
     },
 
     whiteSpace: "pre-wrap",
@@ -176,10 +174,8 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     position: "relative",
     "&:hover #messageActionsButton": {
-      display: "flex",
-      position: "absolute",
-      top: 0,
-      right: 0,
+      visibility: "visible",
+      opacity: 1,
     },
     whiteSpace: "pre-wrap",
     backgroundColor: theme.mode === 'light' ? "#dcf8c6" : "#005c4b",
@@ -205,10 +201,8 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     position: "relative",
     "&:hover #messageActionsButton": {
-      display: "flex",
-      position: "absolute",
-      top: 0,
-      right: 0,
+      visibility: "visible",
+      opacity: 1,
     },
     whiteSpace: "pre-wrap",
     backgroundColor: "#F0E68C",
@@ -248,12 +242,15 @@ const useStyles = makeStyles((theme) => ({
   },
 
   messageActionsButton: {
-    display: "none",
-    position: "relative",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    visibility: "hidden",
+    opacity: 0,
+    transition: "opacity 120ms ease",
     color: "#999",
     zIndex: 1,
     backgroundColor: "inherit",
-    opacity: "90%",
     "&:hover, &.Mui-focusVisible": { backgroundColor: "inherit" },
   },
 

@@ -17,5 +17,6 @@ messageRoutes.post("/messages/edit/:messageId", isAuth, MessageController.edit);
 
 messageRoutes.get("/messages-allMe", isAuth, MessageController.allMe);
 messageRoutes.post('/message/forward', isAuth, MessageController.forwardMessage)
+messageRoutes.get("/messages/transcribeAudio/:fileName", isAuth, MessageController.transcribeAudioMessage);
 
 export default messageRoutes;

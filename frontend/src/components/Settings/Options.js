@@ -13,6 +13,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { grey, blue } from "@material-ui/core/colors";
 
 import { Tab, Tabs, TextField } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import { toast } from "react-toastify";
+import api from "../../services/api";
 import { i18n } from "../../translate/i18n";
 import useCompanySettings from "../../hooks/useSettings/companySettings";
 
@@ -104,6 +107,8 @@ export default function Options(props) {
   const [acceptAudioMessageContact, setAcceptAudioMessageContact] = useState("enabled");
   const [loadingAcceptAudioMessageContact, setLoadingAcceptAudioMessageContact] = useState(false);
 
+  // (Removido) Transcrição de Áudio por empresa agora é controlado apenas por plano
+
   //LGPD
   const [enableLGPD, setEnableLGPD] = useState("disabled");
   const [loadingEnableLGPD, setLoadingEnableLGPD] = useState(false);
@@ -155,6 +160,10 @@ export default function Options(props) {
 
   const { update } = useCompanySettings();
 
+  // OpenAI API Key (Settings antigo)
+  const [openAIKey, setOpenAIKey] = useState("");
+  const [savingOpenAI, setSavingOpenAI] = useState(false);
+
   const isSuper = () => {
     return user.super;
   };
@@ -168,6 +177,11 @@ export default function Options(props) {
 
       if (userPar) {
         setUserCreation(userPar.value);
+      }
+
+      const openai = oldSettings.find((s) => s.key === "openaikeyaudio");
+      if (openai) {
+        setOpenAIKey(openai.value || "");
       }
     }
   }, [oldSettings])
@@ -440,6 +454,8 @@ export default function Options(props) {
     setLoadingAcceptAudioMessageContact(false);
   }
 
+  // (Removido) handler de Transcrição de Áudio por empresa
+
   async function handleEnableLGPD(value) {
     setEnableLGPD(value);
     setLoadingEnableLGPD(true);
@@ -478,6 +494,19 @@ export default function Options(props) {
       data: value,
     });
     setLoadingDirectTicketsToWallets(false);
+  }
+
+  // OpenAI key save handler
+  async function handleSaveOpenAIKey() {
+    try {
+      setSavingOpenAI(true);
+      await api.put(`/settings/openaikeyaudio`, { value: openAIKey });
+      toast.success("Chave OpenAI salva com sucesso.");
+    } catch (err) {
+      toast.error("Falha ao salvar a chave OpenAI.");
+    } finally {
+      setSavingOpenAI(false);
+    }
   }
 
   return (
@@ -815,6 +844,8 @@ export default function Options(props) {
           </FormControl>
         </Grid>
 
+        {/* (Removido) Transcrição de Áudio por empresa */}
+
         <Grid xs={12} sm={6} md={4} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="enableLGPD-label"> {i18n.t("settings.settings.options.enableLGPD")}</InputLabel>
@@ -1129,6 +1160,31 @@ export default function Options(props) {
         
               
       </Grid>
-    </>
-  );
-}
+
+        {/* OPENAI API KEY (WHISPER) - somente empresa 1 */}
+        {user?.companyId === 1 && (
+          <Grid xs={12} sm={12} md={12} item>
+            <TextField
+              fullWidth
+              variant="outlined"
+              type="password"
+              label="OpenAI API Key (Transcrição de Aúdio)"
+              value={openAIKey}
+              onChange={(e) => setOpenAIKey(e.target.value)}
+            />
+            <div style={{ marginTop: 8, display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                disabled={savingOpenAI}
+                onClick={handleSaveOpenAIKey}
+              >
+                {savingOpenAI ? "Salvando..." : "Salvar chave"}
+              </Button>
+            </div>
+          </Grid>
+        )}
+
+              </>
+            );
+          }

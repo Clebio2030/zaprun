@@ -18,6 +18,7 @@ interface PlanData {
   useExternalApi?: boolean;
   useKanban?: boolean;
   useOpenAi?: boolean;
+  useAudioTranscription?: boolean;
   useIntegrations?: boolean;
   isPublic?: boolean;
 }

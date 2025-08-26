@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendMessageFlow = exports.edit = exports.send = exports.allMe = exports.remove = exports.forwardMessage = exports.store = exports.index = void 0;
+exports.sendMessageFlow = exports.edit = exports.send = exports.allMe = exports.remove = exports.forwardMessage = exports.transcribeAudioMessage = exports.store = exports.index = void 0;
 const AppError_1 = __importDefault(require("../errors/AppError"));
 const fs_1 = __importDefault(require("fs"));
 const SetTicketMessagesAsRead_1 = __importDefault(require("../helpers/SetTicketMessagesAsRead"));
@@ -56,6 +56,7 @@ const CompaniesSettings_1 = __importDefault(require("../models/CompaniesSettings
 const facebookMessageListener_1 = require("../services/FacebookServices/facebookMessageListener");
 const EditWhatsAppMessage_1 = __importDefault(require("../services/MessageServices/EditWhatsAppMessage"));
 const CheckNumber_1 = __importDefault(require("../services/WbotServices/CheckNumber"));
+const TranscribeAudioMessageService_1 = __importDefault(require("../services/MessageServices/TranscribeAudioMessageService"));
 const index = async (req, res) => {
     const { ticketId } = req.params;
     const { pageNumber, selectedQueues: queueIdsStringified } = req.query;
@@ -170,6 +171,37 @@ const store = async (req, res) => {
     }
 };
 exports.store = store;
+// Transcrição de Áudio (manual via HTTP)
+const transcribeAudioMessage = async (req, res) => {
+    const { fileName } = req.params;
+    const { companyId } = req.user;
+    try {
+        const transcribedText = await (0, TranscribeAudioMessageService_1.default)(fileName, companyId);
+        if (typeof transcribedText === "string") {
+            const msg = transcribedText;
+            // Mapear mensagens de regra de negócio para códigos HTTP adequados
+            if (msg === "Recurso de transcrição de áudio não habilitado no plano da empresa.") {
+                return res.status(403).send({ error: msg });
+            }
+            if (msg === "Arquivo não encontrado" || msg === "Empresa não encontrada") {
+                return res.status(404).send({ error: msg });
+            }
+            if (msg.startsWith("Token OpenAI não configurado")) {
+                return res.status(400).send({ error: msg });
+            }
+            // Falhas internas ao verificar configurações/plano permanecem 500
+            return res.status(500).send({ error: msg });
+        }
+        return res.send(transcribedText);
+    }
+    catch (error) {
+        console.error(error);
+        return res
+            .status(500)
+            .send({ error: "Erro ao transcrever a mensagem de áudio." });
+    }
+};
+exports.transcribeAudioMessage = transcribeAudioMessage;
 const forwardMessage = async (req, res) => {
     const { quotedMsg, signMessage, messageId, contactId } = req.body;
     const { id: userId, companyId } = req.user;

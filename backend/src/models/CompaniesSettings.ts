@@ -72,6 +72,8 @@ import {
     @Column
     acceptAudioMessageContact: string; 
 
+    // (removido) Transcrição de áudio por empresa agora é controlada apenas pelo plano
+
     @Column
     sendMsgTransfTicket: string;
 

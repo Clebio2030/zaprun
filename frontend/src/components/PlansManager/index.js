@@ -82,6 +82,7 @@ export function PlanManagerForm(props) {
         useExternalApi: true,
         useKanban: true,
         useOpenAi: true,
+        useAudioTranscription: true,
         useIntegrations: true,
         isPublic: true
     });
@@ -350,6 +351,24 @@ export function PlanManagerForm(props) {
                             </FormControl>
                         </Grid>
 
+                        {/* TRANSCRIÇÃO DE ÁUDIO */}
+                        <Grid xs={12} sm={8} md={2} item>
+                            <FormControl margin="dense" variant="outlined" fullWidth>
+                                <InputLabel htmlFor="useAudioTranscription-selection">Transcrição de Áudio</InputLabel>
+                                <Field
+                                    as={Select}
+                                    id="useAudioTranscription-selection"
+                                    label="Transcrição de Áudio"
+                                    labelId="useAudioTranscription-selection-label"
+                                    name="useAudioTranscription"
+                                    margin="dense"
+                                >
+                                    <MenuItem value={true}>{i18n.t("plans.form.enabled")}</MenuItem>
+                                    <MenuItem value={false}>{i18n.t("plans.form.disabled")}</MenuItem>
+                                </Field>
+                            </FormControl>
+                        </Grid>
+
                         {/* INTEGRACOES */}
                         <Grid xs={12} sm={8} md={2} item>
                             <FormControl margin="dense" variant="outlined" fullWidth>
@@ -434,6 +453,10 @@ export function PlansManagerGrid(props) {
         return row.useOpenAi === false ? `${i18n.t("plans.form.no")}` : `${i18n.t("plans.form.yes")}`;
     };
 
+    const renderAudioTranscription = (row) => {
+        return row.useAudioTranscription === false ? `${i18n.t("plans.form.no")}` : `${i18n.t("plans.form.yes")}`;
+    };
+
     const renderIntegrations = (row) => {
         return row.useIntegrations === false ? `${i18n.t("plans.form.no")}` : `${i18n.t("plans.form.yes")}`;
     };
@@ -464,6 +487,7 @@ export function PlansManagerGrid(props) {
                         <TableCell align="center">API Externa</TableCell>
                         <TableCell align="center">Kanban</TableCell>
                         <TableCell align="center">Talk.Ai</TableCell>
+                        <TableCell align="center">Transcrição de Áudio</TableCell>
                         <TableCell align="center">Integrações</TableCell>
                     </TableRow>
                 </TableHead>
@@ -490,6 +514,7 @@ export function PlansManagerGrid(props) {
                             <TableCell align="center">{renderExternalApi(row)}</TableCell>
                             <TableCell align="center">{renderKanban(row)}</TableCell>
                             <TableCell align="center">{renderOpenAi(row)}</TableCell>
+                            <TableCell align="center">{renderAudioTranscription(row)}</TableCell>
                             <TableCell align="center">{renderIntegrations(row)}</TableCell>
                         </TableRow>
                     ))}
@@ -521,6 +546,7 @@ export default function PlansManager() {
         useExternalApi: true,
         useKanban: true,
         useOpenAi: true,
+        useAudioTranscription: true,
         useIntegrations: true,
         isPublic: true
     })
@@ -595,6 +621,7 @@ export default function PlansManager() {
             useExternalApi: true,
             useKanban: true,
             useOpenAi: true,
+            useAudioTranscription: true,
             useIntegrations: true,
             isPublic: true
         })
@@ -611,6 +638,7 @@ export default function PlansManager() {
         let useExternalApi = data.useExternalApi === false ? false : true
         let useKanban = data.useKanban === false ? false : true
         let useOpenAi = data.useOpenAi === false ? false : true
+        let useAudioTranscription = data.useAudioTranscription === false ? false : true
         let useIntegrations = data.useIntegrations === false ? false : true
 
         setRecord({
@@ -629,6 +657,7 @@ export default function PlansManager() {
             useExternalApi,
             useKanban,
             useOpenAi,
+            useAudioTranscription,
             useIntegrations,
             isPublic: data.isPublic
         })

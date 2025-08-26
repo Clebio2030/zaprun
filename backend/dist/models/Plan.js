@@ -99,6 +99,10 @@ __decorate([
 __decorate([
     sequelize_typescript_1.Column,
     __metadata("design:type", Boolean)
+], Plan.prototype, "useAudioTranscription", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", Boolean)
 ], Plan.prototype, "useIntegrations", void 0);
 __decorate([
     (0, sequelize_typescript_1.Default)(true),

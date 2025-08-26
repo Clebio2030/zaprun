@@ -7,11 +7,12 @@ const Chat_1 = __importDefault(require("../../models/Chat"));
 const ChatMessage_1 = __importDefault(require("../../models/ChatMessage"));
 const ChatUser_1 = __importDefault(require("../../models/ChatUser"));
 const User_1 = __importDefault(require("../../models/User"));
-async function CreateMessageService({ senderId, chatId, message }) {
+async function CreateMessageService({ senderId, chatId, message, files = [] }) {
     const newMessage = await ChatMessage_1.default.create({
         senderId,
         chatId,
-        message
+        message,
+        files
     });
     await newMessage.reload({
         include: [
@@ -24,7 +25,8 @@ async function CreateMessageService({ senderId, chatId, message }) {
         ]
     });
     const sender = await User_1.default.findByPk(senderId);
-    await newMessage.chat.update({ lastMessage: `${sender.name}: ${message}` });
+    const messagePreview = message || (files.length > 0 ? "[Arquivo anexado]" : "");
+    await newMessage.chat.update({ lastMessage: `${sender.name}: ${messagePreview}` });
     const chatUsers = await ChatUser_1.default.findAll({
         where: { chatId }
     });
